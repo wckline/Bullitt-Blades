@@ -29,22 +29,100 @@
 	
 	<div class="container clearfix row">
 		<div class="">
+		</div><!--/.secondary-->
 			<h2>Feel Free to Contact Us for a Quote for your Commercial or Large-Scale Lawn Maintenence!</h2>
 			<p></p>
 			<p>502-432-6414</p>
 			<p>bullittblades@gmail.com</p>
-            <img class="GenLawn" src="G:/Code Louisville/Bullitt Blades/generic lawn.jpg">
-		</div><!--/.secondary-->
+            
 		
 		<div class="primary col">
-			
 		</div><!--/.primary-->
 		
 		<div class="tertiary col">
-			
+          
 		</div><!--/.tertiary-->	
 	</div>
-	
+
+    <script src= "angular.min.js"></script>
+<script src= "calc.js"></script>
+
+<div ng-app="myApp" ng-controller="personController">
+  <h2>Quote Calculator</h2>
+  Acres: <input type="number" ng-model="acres"> 
+  Trees: <input type="number" ng-model="trees">
+
+  <p><b>Total in dollars:</b> {{ total() | currency : $ }}</p>
+</div>
+
+
+<div id="map">
+
+<script>
+
+var map;
+
+function initMap() {
+
+map = new google.maps.Map(document.getElementById('map'), {
+
+center: {lat: 37.9746442, lng: -85.7010275},
+
+zoom: 15
+
+});
+
+
+var infowindow = new google.maps.InfoWindow();
+
+var service = new google.maps.places.PlacesService(map);
+
+
+
+service.getDetails({
+
+placeId: 'EioxNDkgQmVhbiBTdCwgU2hlcGhlcmRzdmlsbGUsIEtZIDQwMTY1LCBVU0E'
+
+}, function(place, status) {
+
+if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+var marker = new google.maps.Marker({
+
+map: map,
+
+position: place.geometry.location
+
+});
+
+google.maps.event.addListener(marker, 'click', function() {
+
+infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+
+'Place ID: ' + place.place_id + '<br>' +
+
+place.formatted_address + '</div>');
+
+infowindow.open(map, this);
+
+});
+
+}
+
+});
+
+}
+
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFT-eLttrgxAjzl3rz7MowhTZ6RbPa6PI&libraries=places&callback=initMap"
+…
+
+
+async defer></script>
+    </div>
+
+
+			
 	<footer class="main-footer">
 		<span>&copy;2016 Willie Kline.</span>
 	</footer>
